@@ -1,0 +1,5 @@
+# PAGCoilAdapter
+记录一次学习，基于Coil来获取PAG资源，同时适配了原生View和Compose。主要思路是继承Coil的Decoder并重写，以PAGFile来获取PAGComposition，以及继承Drawable以保存PAGComposition，
+同时适配Coil的工作流程。至于AsyncPAGImagePainter，主要增加了对PAGComposition的适配，和Coil的AsyncImagePainter无明显差异
+
+提示：请使用Android Studio Giraffe及以上版本构建。当前使用的PAG版本，还是PAGView比较稳，PAGImageView有些奇奇怪怪的问题
