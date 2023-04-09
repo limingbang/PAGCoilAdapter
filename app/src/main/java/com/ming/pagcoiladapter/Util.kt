@@ -1,0 +1,55 @@
+package com.ming.pagcoiladapter
+
+fun buildPAGData(): List<Any> {
+    return listOf(
+        "file:///android_asset/fans.pag",
+        "file:///android_asset/guide_hand_drag.pag",
+        "file:///android_asset/like.pag",
+        "file:///android_asset/refreshing.pag",
+        "file:///android_asset/Replacement.pag",
+        "file:///android_asset/transitions.pag",
+        "file:///android_asset/wstask_circle.pag",
+        "file:///android_asset/wstask_prizebaoji.pag",
+        R.drawable.image1,
+
+        "file:///android_asset/fans.pag",
+        "file:///android_asset/guide_hand_drag.pag",
+        "file:///android_asset/like.pag",
+        "file:///android_asset/refreshing.pag",
+        "file:///android_asset/Replacement.pag",
+        "file:///android_asset/transitions.pag",
+        "file:///android_asset/wstask_circle.pag",
+        "file:///android_asset/wstask_prizebaoji.pag",
+        R.drawable.image2,
+
+        "file:///android_asset/fans.pag",
+        "file:///android_asset/guide_hand_drag.pag",
+        "file:///android_asset/like.pag",
+        "file:///android_asset/refreshing.pag",
+        "file:///android_asset/Replacement.pag",
+        "file:///android_asset/transitions.pag",
+        "file:///android_asset/wstask_circle.pag",
+        "file:///android_asset/wstask_prizebaoji.pag",
+        R.drawable.image3,
+
+        "file:///android_asset/fans.pag",
+        "file:///android_asset/guide_hand_drag.pag",
+        "file:///android_asset/like.pag",
+        "file:///android_asset/refreshing.pag",
+        "file:///android_asset/Replacement.pag",
+        "file:///android_asset/transitions.pag",
+        "file:///android_asset/wstask_circle.pag",
+        "file:///android_asset/wstask_prizebaoji.pag",
+        R.drawable.image4,
+
+        "file:///android_asset/fans.pag",
+        "file:///android_asset/guide_hand_drag.pag",
+        "file:///android_asset/like.pag",
+        "file:///android_asset/refreshing.pag",
+        "file:///android_asset/Replacement.pag",
+        "file:///android_asset/transitions.pag",
+        "file:///android_asset/wstask_circle.pag",
+        "file:///android_asset/wstask_prizebaoji.pag",
+        R.drawable.image5,
+    )
+}
