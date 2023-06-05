@@ -1,4 +1,4 @@
-package com.ming.pag.compose
+package com.ming.pag.coil
 
 import android.graphics.Canvas
 import android.graphics.ColorFilter

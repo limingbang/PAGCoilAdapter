@@ -5,7 +5,7 @@ import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import coil.target.ImageViewTarget
-import com.ming.pag.compose.PAGAdapterDrawable
+import com.ming.pag.coil.PAGAdapterDrawable
 import org.libpag.PAGView
 
 class PAGImageViewTarget(

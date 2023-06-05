@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.imageLoader
-import com.ming.pag.compose.PAGCoilDecoder
 import com.ming.pag.load
 import com.ming.pag.view.PAGImageViewLayout
 import org.libpag.PAGScaleMode
@@ -47,11 +46,6 @@ class MyViewActivity : AppCompatActivity() {
             holder.v.load(
                 pagData[position],
                 holder.v.context.imageLoader
-                    .newBuilder()
-                    .components {
-                        add(PAGCoilDecoder.Factory())
-                    }
-                    .build()
             ) {
                 placeholder(R.drawable.pexels_ian_turnell)
                 error(R.drawable.pexels_ian_turnell)

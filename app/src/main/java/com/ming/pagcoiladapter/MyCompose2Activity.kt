@@ -15,17 +15,18 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.imageLoader
+import coil.request.ImageRequest
 import com.ming.pag.compose.PAGImageViewCompose
-import com.ming.pag.compose.rememberAsyncPAGImagePainter
+import com.ming.pag.compose.loadPAGImageFile
 import com.ming.pagcoiladapter.ui.theme.PAGCoilAdapterTheme
 
-class MyComposeActivity : ComponentActivity() {
+class MyCompose2Activity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +43,13 @@ class MyComposeActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         items(items = buildPAGData()) {
-                            val pagImage = rememberAsyncPAGImagePainter(
-                                model = it,
-                                imageLoader = this@MyComposeActivity.imageLoader,
-                                placeholder = painterResource(id = R.drawable.pexels_ian_turnell),
-                                error = painterResource(id = R.drawable.pexels_ian_turnell)
+                            val pagImage by loadPAGImageFile(
+                               loader = this@MyCompose2Activity.imageLoader,
+                                request = ImageRequest.Builder(this@MyCompose2Activity)
+                                    .placeholder(R.drawable.pexels_ian_turnell)
+                                    .error(R.drawable.pexels_ian_turnell)
+                                    .data(it)
+                                    .build()
                             )
 
                             Box(

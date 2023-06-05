@@ -1,7 +1,5 @@
 package com.ming.pag.compose
 
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,16 +14,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.isUnspecified
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.DrawScope.Companion.DefaultFilterQuality
-import androidx.compose.ui.graphics.painter.BitmapPainter
-import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -41,11 +35,13 @@ import coil.size.Dimension
 import coil.size.Precision
 import coil.transition.CrossfadeTransition
 import coil.transition.TransitionTarget
-import com.google.accompanist.drawablepainter.DrawablePainter
+import com.ming.pag.coil.CoilPAGImage
+import com.ming.pag.coil.PAGAdapterDrawable
 import com.ming.pag.compose.AsyncPAGImagePainter.Companion.DefaultTransform
 import com.ming.pag.compose.AsyncPAGImagePainter.PAGState
 import com.ming.pag.onStateOf
 import com.ming.pag.requestOf
+import com.ming.pag.toPainter
 import com.ming.pag.toScale
 import com.ming.pag.transformOf
 import kotlinx.coroutines.CoroutineScope
@@ -140,7 +136,7 @@ fun rememberAsyncPAGImagePainter(
     onState: ((PAGState) -> Unit)? = null,
     contentScale: ContentScale = ContentScale.Fit,
     filterQuality: FilterQuality = DefaultFilterQuality,
-): PAGImage {
+): CoilPAGImage {
     val request = requestOf(model)
     validateRequest(request)
 
@@ -153,10 +149,8 @@ fun rememberAsyncPAGImagePainter(
     painter.imageLoader = imageLoader
     painter.request = request // Update request last so all other properties are up to date.
     painter.onRemembered() // Invoke this manually so `painter.state` is set to `Loading` immediately.
-    return PAGImage(painter, painter.pag)
+    return CoilPAGImage(painter, painter.pag)
 }
-
-class PAGImage(val painter: Painter, val pag: PAGComposition?)
 
 /**
  * A [Painter] and [PAGComposition] that that executes an [ImageRequest] asynchronously and get the result.
@@ -254,7 +248,7 @@ class AsyncPAGImagePainter internal constructor(
         // If we're in inspection mode skip the image request and set the state to loading.
         if (isPreview) {
             val request = request.newBuilder().defaults(imageLoader.defaults).build()
-            updateState(PAGState.Loading(request.placeholder?.toPainter()))
+            updateState(PAGState.Loading(request.placeholder?.toPainter(filterQuality = filterQuality)))
             return
         }
 
@@ -286,7 +280,7 @@ class AsyncPAGImagePainter internal constructor(
         return request.newBuilder()
             .target(onStart = { placeholder ->
                 if (!isInterceptionPlaceholder) {
-                    updateState(PAGState.Loading(placeholder?.toPainter()))
+                    updateState(PAGState.Loading(placeholder?.toPainter(filterQuality = filterQuality)))
                     isInterceptionPlaceholder = true
                 }
             })
@@ -351,15 +345,8 @@ class AsyncPAGImagePainter internal constructor(
     }
 
     private fun ImageResult.toState() = when (this) {
-        is SuccessResult -> PAGState.Success(drawable.toPainter(), (drawable as? PAGAdapterDrawable)?.pag,this)
-        is ErrorResult -> PAGState.Error(drawable?.toPainter(), result = this)
-    }
-
-    /** Convert this [Drawable] into a [Painter] using Compose primitives if possible. */
-    private fun Drawable.toPainter() = when (this) {
-        is BitmapDrawable -> BitmapPainter(bitmap.asImageBitmap(), filterQuality = filterQuality)
-        is ColorDrawable -> ColorPainter(Color(color))
-        else -> DrawablePainter(mutate())
+        is SuccessResult -> PAGState.Success(drawable.toPainter(filterQuality = filterQuality), (drawable as? PAGAdapterDrawable)?.pag,this)
+        is ErrorResult -> PAGState.Error(drawable?.toPainter(filterQuality = filterQuality), result = this)
     }
 
     /**

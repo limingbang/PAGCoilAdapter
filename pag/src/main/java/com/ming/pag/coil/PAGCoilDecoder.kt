@@ -1,4 +1,4 @@
-package com.ming.pag.compose
+package com.ming.pag.coil
 
 import coil.ImageLoader
 import coil.decode.DecodeResult

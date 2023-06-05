@@ -1,18 +1,18 @@
 [versions]
-com-android-application = "8.1.0-alpha11"
+com-android-application = "8.2.0-alpha06"
 org-jetbrains-kotlin-android = "1.7.20"
-core-ktx = "1.9.0"
+core-ktx = "1.10.1"
 junit = "4.13.2"
-androidx-test-ext-junit = "1.1.3"
-espresso-core = "3.4.0"
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
 lifecycle-runtime-ktx = "2.6.1"
 activity-compose = "1.5.1"
-compose-bom = "2023.03.00"
-com-android-library = "8.1.0-alpha11"
+compose-bom = "2023.05.01"
+com-android-library = "8.2.0-alpha06"
 appcompat = "1.6.1"
-libpag = "4.2.47"
-coil = "2.3.0"
-accompanist-drawable = "0.31.0-alpha"
+libpag = "4.2.90"
+coil = "2.4.0"
+accompanist-drawable = "0.31.3-beta"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -33,7 +33,7 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 libpag = { group = "com.tencent.tav", name = "libpag", version.ref = "libpag" }
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 accompanist-drawable = { group = "com.google.accompanist", name = "accompanist-drawablepainter", version.ref = "accompanist-drawable" }
-androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version = "1.2.1" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version = "1.3.0" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }

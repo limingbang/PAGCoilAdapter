@@ -1,14 +1,24 @@
 package com.ming.pag
 
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.FilterQuality
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.request.ImageRequest
 import coil.request.NullRequestDataException
 import coil.size.Scale
+import com.google.accompanist.drawablepainter.DrawablePainter
 import com.ming.pag.compose.AsyncPAGImagePainter.Companion.DefaultTransform
 import com.ming.pag.compose.AsyncPAGImagePainter.PAGState
 
@@ -72,4 +82,11 @@ internal fun onStateOf(
 internal fun ContentScale.toScale() = when (this) {
     ContentScale.Fit, ContentScale.Inside -> Scale.FIT
     else -> Scale.FILL
+}
+
+/** Convert this [Drawable] into a [Painter] using Compose primitives if possible. */
+internal fun Drawable.toPainter(filterQuality: FilterQuality = DrawScope.DefaultFilterQuality) = when (this) {
+    is BitmapDrawable -> BitmapPainter(bitmap.asImageBitmap(), filterQuality = filterQuality)
+    is ColorDrawable -> ColorPainter(Color(color))
+    else -> DrawablePainter(mutate())
 }

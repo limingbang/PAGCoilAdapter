@@ -36,7 +36,15 @@ class MainActivity : ComponentActivity() {
                         onClick = {
                             startActivity(Intent(this@MainActivity, MyComposeActivity::class.java))
                         }) {
-                        Text(text = "compose")
+                        Text(text = "compose1")
+                    }
+
+                    TextButton(
+                        modifier = Modifier.padding(top = 10.dp),
+                        onClick = {
+                            startActivity(Intent(this@MainActivity, MyCompose2Activity::class.java))
+                        }) {
+                        Text(text = "compose2")
                     }
                 }
             }
