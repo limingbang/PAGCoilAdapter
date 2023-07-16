@@ -2,6 +2,7 @@ package com.ming.pag.compose
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.RememberObserver
 import androidx.compose.runtime.State
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.graphics.Color
@@ -46,8 +47,14 @@ fun loadPAGImageFile(
                 )
             }
 
+            val pre = value.painter
+
             withContext(Dispatchers.Main) {
                 value = realResult
+                if (pre !== value.painter) {
+                    (pre as? RememberObserver)?.onForgotten()
+                    (value.painter as? RememberObserver)?.onRemembered()
+                }
             }
         }
     }
